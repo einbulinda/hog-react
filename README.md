@@ -1,1 +1,1 @@
-# hog-react
+#Project for House of Glamour
