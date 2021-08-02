@@ -1,8 +1,13 @@
+import Header from './components/Header'
+import './App.scss';
+import 'bulma/css/bulma.min.css'
+import {Button} from 'react-bulma-components'
 
 function App() {
   return (
     <div className="App">
-        <h1>Hello World</h1>
+      <Header/>
+      <Button color="primary">Bulma Button</Button>
     </div>
   );
 }
