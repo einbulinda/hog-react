@@ -1,32 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,700;1,400&display=swap');
+// Open Sans Font
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:ital,wght@1,300&display=swap");
 
-html{
-    font-size: 10px;
-}
-html, body{
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
+$theme-colors: (
+  "primary": darkcyan,
+  "dark": black,
+);
 
-*,::before,::after{
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-}
-body{
-    font-family: 'Open Sans', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 1;
-}
+@import "~bootstrap/scss/bootstrap";
 
-a{
-    text-decoration: none;
+// Variables
+$font-montserrat: "Montserrat", sans-serif;
+$font-roboto: "Roboto", sans-serif;
+
+html {
+  font-size: 10px;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-a, a:hover{
-    -webkit-transition: all 0.4s ease-in-out;
-    -moz-transition: all 0.4s ease-in-out;
-    transition: all 0.4s ease-in-out;
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+body {
+  font-family: $font-roboto;
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+a {
+  text-decoration: none;
+}
+
+a,
+a:hover {
+  -webkit-transition: all 0.4s ease-in-out;
+  -moz-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
 }
