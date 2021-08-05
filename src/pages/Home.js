@@ -1,30 +1,12 @@
 import ProductCard from "../components/ProductCard";
-import { useEffect } from "react";
-import { useState } from "react";
+import useFetch from "../useFetch";
 
 const Home = () => {
-  const [products, setProducts] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    fetch("http://localhost:8000/products")
-      .then((res) => {
-        if (!res.ok) {
-          throw Error("Could not fetch data for the resource from server");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setProducts(data);
-        setIsLoading(false);
-        setError(null);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        setError(err.message);
-      });
-  }, []);
+  const {
+    data: products,
+    isLoading,
+    error,
+  } = useFetch("http://localhost:8000/products");
 
   return (
     <main>
