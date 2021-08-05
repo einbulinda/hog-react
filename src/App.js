@@ -1,7 +1,9 @@
 import "./App.scss";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Header from "./components/Header.js";
-import Footer from "./components/Footer.js";
+// Layouts
+import MainLayout from "./layouts/MainLayout";
+
+// Pages
 import Home from "./pages/Home.js";
 import About from "./pages/About.js";
 import Products from "./pages/Products.js";
@@ -13,38 +15,75 @@ import Accounts from "./pages/Accounts.js";
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Header />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/products">
-            <Products />
-          </Route>
-          <Route path="/sale">
-            <Promotions />
-          </Route>
-          <Route path="/contact">
-            <ContactUs />
-          </Route>
-          <Route path="/cart">
-            <Cart />
-          </Route>
-          <Route path="/wishlist">
-            <Wishlist />
-          </Route>
-          <Route path="/account">
-            <Accounts />
-          </Route>
-        </Switch>
-        <Footer />
-      </div>
-    </Router>
+    <div className="App">
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <MainLayout>
+              <Home />
+            </MainLayout>
+          )}
+        />
+        <Route
+          path="/about"
+          render={() => (
+            <MainLayout>
+              <About />
+            </MainLayout>
+          )}
+        />
+        <Route
+          path="/products"
+          render={() => {
+            <MainLayout>
+              <Products />
+            </MainLayout>;
+          }}
+        />
+        <Route
+          path="/sale"
+          render={() => {
+            <MainLayout>
+              <Promotions />
+            </MainLayout>;
+          }}
+        />
+        <Route
+          path="/contact"
+          render={() => {
+            <MainLayout>
+              <ContactUs />
+            </MainLayout>;
+          }}
+        />
+        <Route
+          path="/cart"
+          render={() => {
+            <MainLayout>
+              <Cart />
+            </MainLayout>;
+          }}
+        />
+        <Route
+          path="/wishlist"
+          render={() => {
+            <MainLayout>
+              <Wishlist />
+            </MainLayout>;
+          }}
+        />
+        <Route
+          path="/account"
+          render={() => {
+            <MainLayout>
+              <Accounts />
+            </MainLayout>;
+          }}
+        />
+      </Switch>
+    </div>
   );
 }
 

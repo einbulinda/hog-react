@@ -4,6 +4,15 @@
 
 ## Institute of Software Technology.
 
+## Owner Details
+
+| Name:  | Einstein Bulinda     |
+| ------ | -------------------- |
+| Email: | einbulinda@gmail.com |
+| ------ | -------------------- |
+| Phone: | +254 702 688 826     |
+| ------ | -------------------- |
+
 ### Pulling this repo
 
 `https://github.com/einbulinda/hog-react.git`
@@ -17,8 +26,11 @@ cd hog-react
 npm start
 ```
 
-Using the _json-web server_ will require the following to fetch products
-`npx json-server --watch data/db.json --port 8000`
+Using the _json-web server_ will require the following to fetch products:
+
+```
+npx json-server --watch data/db.json --port 8000
+```
 
 ---
 
