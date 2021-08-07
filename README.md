@@ -9,9 +9,7 @@
 | Name:  | Einstein Bulinda     |
 | ------ | -------------------- |
 | Email: | einbulinda@gmail.com |
-| ------ | -------------------- |
 | Phone: | +254 702 688 826     |
-| ------ | -------------------- |
 
 ### Pulling this repo
 
