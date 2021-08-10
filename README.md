@@ -77,75 +77,18 @@ npx json-server --watch data/db.json --port 8000
 1. Staff account: _STF_
 1. Admin account: _ADM_
 
-<!-- Headings -->
+## FEATURES DEVELOPED
 
-# H1
+### USERS
 
-## H2
+1. Sign in (with email+password and Google)
+1. Register Account
+1. Reset password
 
-### h3 ....
+### PRODUCTS
 
-###### h6
+1. Fetch Data from local API (json-server)
 
-<!-- Italics -->
+### PAGES
 
-_This is italic_
-_this is also italic_
-
-<!-- Strong -->
-
-**Strong** tags also using **db underscore**
-
-<!-- Strikethrough -->
-
-~~tilde~~ makes this
-
-## <!-- Hotizontal Rule -->
-
----
-
-<!-- Backslash escapes special characters -->
-
-<!-- Blockquote -->
-
-> This is a quote
-
-```NPM
-npm start
-
-npm start
-```
-
-<!-- Links -->
-
-[einbulinda](http://einbulinda.com "Einstein Bulinda")
-
-<!-- ul -->
-
-- item 1
-- item 2 \* Nested item
-<!-- OL -->
-
-1. Item 1
-1. Item 2
-1. Item 3
-
-<!-- Inline Code Block -->
-
-`<p>This is a paragraph</p>`
-
-<!-- Images -->
-
-![House of Glamour Logo](https://markdown-here.com/icon256.png)
-
-<!-- Tables -->
-
-| Name | Email                |
-| ---- | -------------------- |
-| Ein  | einbulinda@gmail.com |
-| Sam  | isteducation.ist.com |
-
-<!-- Task Lists -->
-
-_[x] Task 1
-_[] Task 2
+1. Home Page (not completed)
