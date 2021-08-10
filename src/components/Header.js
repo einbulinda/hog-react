@@ -1,10 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Container, Form, Image, Nav, Navbar } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
+import { auth } from "../firebase/utils";
 
 import Logo from "../assets/logos/mainLogoTxtWhite.png";
 
-const Header = () => {
+const Header = (props) => {
+  const { currentUser } = props;
+
   return (
     <header>
       <Navbar bg="dark" variant="dark" expand="lg">
@@ -59,15 +62,30 @@ const Header = () => {
                   <span> 0</span>
                 </sup>
               </NavLink>
-              <NavLink className="nav-link px-4" to="/account">
-                <FontAwesomeIcon icon="user" />
-              </NavLink>
+              {currentUser && (
+                <NavLink
+                  className="nav-link px-4"
+                  to="#"
+                  onClick={() => auth.signOut()}
+                >
+                  Logout
+                </NavLink>
+              )}
+              {!currentUser && (
+                <NavLink className="nav-link px-4" to="/account">
+                  <FontAwesomeIcon icon="user" />
+                </NavLink>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
     </header>
   );
+};
+
+Header.defaultProps = {
+  currentUser: null,
 };
 
 export default Header;

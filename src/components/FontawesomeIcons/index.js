@@ -3,6 +3,8 @@ import {
   faShoppingCart,
   faHeart,
   faUser,
+  faEnvelope,
+  faLock,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faShoppingCart, faHeart, faUser);
+library.add(faShoppingCart, faHeart, faUser, faEnvelope, faLock);
