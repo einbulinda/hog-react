@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
-import { auth, signInWithGoogle } from "../firebase/utils";
+import { auth, signInWithGoogle } from "../../firebase/utils";
 import { Link } from "react-router-dom";
-import FormInput from "../components/Forms/FormInput";
+import FormInput from "../../components/Forms/FormInput";
 
 const initialState = {
   email: "",
@@ -76,8 +76,13 @@ class SignIn extends Component {
             >
               Sign in with Google
             </Button>
-            <Card.Text>
-              <Link to="/register">Register account</Link>
+            <Card.Text className="row">
+              <div className="col-6">
+                <Link to="/register">Register Account?</Link>
+              </div>
+              <div className="col-6">
+                <Link to="/reset-password">Forgot Password?</Link>
+              </div>
             </Card.Text>
           </Card.Body>
         </Card>

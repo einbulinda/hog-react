@@ -6,15 +6,16 @@ import { Component } from "react";
 import MainLayout from "./layouts/MainLayout";
 
 // Pages
-import Home from "./pages/Home.js";
-import About from "./pages/About.js";
-import Products from "./pages/Products.js";
-import Promotions from "./pages/Promotions.js";
-import ContactUs from "./pages/ContactUs.js";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Products from "./pages/Products";
+import Promotions from "./pages/Promotions";
+import ContactUs from "./pages/ContactUs";
 import Cart from "./pages/Cart.js";
 import Wishlist from "./pages/Wishlist.js";
-import SignIn from "./pages/SignIn.js";
-import Register from "./pages/Register";
+import SignIn from "./pages/UserPages/SignIn";
+import Register from "./pages/UserPages/Register";
+import ResetPassword from "./pages/UserPages/ResetPassword";
 
 const initialState = {
   currentUser: null,
@@ -134,6 +135,18 @@ class App extends Component {
               ) : (
                 <MainLayout currentUser={currentUser}>
                   <Register />
+                </MainLayout>
+              )
+            }
+          />
+          <Route
+            path="/reset-password"
+            render={() =>
+              currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <MainLayout currentUser={currentUser}>
+                  <ResetPassword />
                 </MainLayout>
               )
             }

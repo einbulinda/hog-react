@@ -1,8 +1,8 @@
 import { Component } from "react";
 import { Button, Card, Container, Form, ListGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import FormInput from "../components/Forms/FormInput";
-import { auth, handleUserProfile } from "../firebase/utils";
+import FormInput from "../../components/Forms/FormInput";
+import { auth, handleUserProfile } from "../../firebase/utils";
 
 const initialState = {
   displayName: "",
