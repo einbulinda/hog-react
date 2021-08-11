@@ -73,7 +73,7 @@ const Header = (props) => {
                 </NavLink>
               )}
               {!currentUser && (
-                <NavLink className="nav-link px-4" to="/account">
+                <NavLink className="nav-link px-4" to="/login">
                   <FontAwesomeIcon icon="user" />
                 </NavLink>
               )}

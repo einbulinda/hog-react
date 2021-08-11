@@ -13,14 +13,14 @@ const ResetPassword = (props) => {
 
     try {
       const config = {
-        url: "http://localhost:3000/account",
+        url: "http://localhost:3000/login",
       };
 
       await auth
         .sendPasswordResetEmail(email, config)
         .then(() => {
           alert("Password reset link sent successfully.");
-          this.props.history.push("/account");
+          this.props.history.push("/login");
         })
         .catch(() => {
           const err = ["Email not registered. Lets register!"];
@@ -68,7 +68,7 @@ const ResetPassword = (props) => {
             </Button>
           </Form>
           <Card.Text className="p-3">
-            <Link to="/account">Sign In</Link>
+            <Link to="/login">Sign In</Link>
           </Card.Text>
         </Card.Body>
       </Card>
