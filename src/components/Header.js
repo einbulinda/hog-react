@@ -1,5 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Container, Form, Image, Nav, Navbar } from "react-bootstrap";
+import {
+  Container,
+  Form,
+  Image,
+  Nav,
+  Navbar,
+  NavDropdown,
+} from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { auth } from "../firebase/utils";
@@ -64,13 +71,22 @@ const Header = (props) => {
                 </sup>
               </NavLink>
               {currentUser && (
-                <NavLink
-                  className="nav-link px-4"
-                  to="#"
-                  onClick={() => auth.signOut()}
+                <NavDropdown
+                  menuVariant="dark"
+                  drop="start"
+                  title={currentUser.displayName}
+                  id="collasible-nav-dropdown"
                 >
-                  Logout
-                </NavLink>
+                  <NavDropdown.Item>
+                    <NavLink className="nav-link" to="/my-account">
+                      My Account
+                    </NavLink>
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item to="#" onClick={() => auth.signOut()}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
               )}
               {!currentUser && (
                 <NavLink className="nav-link px-4" to="/login">

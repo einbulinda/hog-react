@@ -23,6 +23,7 @@ import SignIn from "./pages/UserPages/SignIn";
 import Register from "./pages/UserPages/Register";
 import ResetPassword from "./pages/UserPages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
+import MyAccount from "./pages/UserPages/MyAccount";
 
 const App = (props) => {
   const { setCurrentUser, currentUser } = props;
@@ -147,6 +148,16 @@ const App = (props) => {
             <WithAuth>
               <MainLayout>
                 <Dashboard />
+              </MainLayout>
+            </WithAuth>
+          )}
+        />
+        <Route
+          path="/my-account"
+          render={() => (
+            <WithAuth>
+              <MainLayout>
+                <MyAccount />
               </MainLayout>
             </WithAuth>
           )}

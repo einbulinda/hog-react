@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button, Card, Container, Form, ListGroup } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import FormInput from "../../components/Forms/FormInput";
 import { auth, handleUserProfile } from "../../firebase/utils";
 
@@ -35,6 +35,7 @@ const Register = (props) => {
       );
       await handleUserProfile(user, { displayName });
       resetForm();
+      props.history.push("/");
     } catch (error) {
       console.log(error);
     }
@@ -112,4 +113,4 @@ const Register = (props) => {
   );
 };
 
-export default Register;
+export default withRouter(Register);
