@@ -79,6 +79,12 @@ npx json-server --watch data/db.json --port 8000
 
 ## FEATURES DEVELOPED
 
+### PROGRESS SO FAR
+
+1. Users can create account, log in, log out and reset passwords
+1. Dynamic display of data from a local json-server
+1. Setting up of the Redux store
+
 ### USERS
 
 1. Sign in (with email+password and Google)

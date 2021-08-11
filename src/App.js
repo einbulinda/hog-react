@@ -1,7 +1,10 @@
 import "./App.scss";
+import { connect } from "react-redux";
+import { setCurrentUser } from "./redux/User/user.action.js";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { auth, handleUserProfile } from "./firebase/utils";
 import { Component } from "react";
+
 // Layouts
 import MainLayout from "./layouts/MainLayout";
 
@@ -17,34 +20,23 @@ import SignIn from "./pages/UserPages/SignIn";
 import Register from "./pages/UserPages/Register";
 import ResetPassword from "./pages/UserPages/ResetPassword";
 
-const initialState = {
-  currentUser: null,
-};
-
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...initialState };
-  }
-
   authListener = null;
 
   componentDidMount() {
+    const { setCurrentUser } = this.props;
+
     this.authListener = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await handleUserProfile(userAuth);
         userRef.onSnapshot((snapshot) => {
-          this.setState({
-            currentUser: {
-              id: snapshot.id,
-              ...snapshot.data(),
-            },
+          setCurrentUser({
+            id: snapshot.id,
+            ...snapshot.data(),
           });
         });
       }
-      this.setState({
-        ...initialState,
-      });
+      setCurrentUser(userAuth);
     });
   }
 
@@ -53,7 +45,7 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser } = this.state;
+    const { currentUser } = this.props;
 
     return (
       <div className="App">
@@ -62,7 +54,7 @@ class App extends Component {
             exact
             path="/"
             render={() => (
-              <MainLayout currentUser={currentUser}>
+              <MainLayout>
                 <Home />
               </MainLayout>
             )}
@@ -70,7 +62,7 @@ class App extends Component {
           <Route
             path="/about"
             render={() => (
-              <MainLayout currentUser={currentUser}>
+              <MainLayout>
                 <About />
               </MainLayout>
             )}
@@ -78,7 +70,7 @@ class App extends Component {
           <Route
             path="/products"
             render={() => (
-              <MainLayout currentUser={currentUser}>
+              <MainLayout>
                 <Products />
               </MainLayout>
             )}
@@ -86,7 +78,7 @@ class App extends Component {
           <Route
             path="/sale"
             render={() => (
-              <MainLayout currentUser={currentUser}>
+              <MainLayout>
                 <Promotions />
               </MainLayout>
             )}
@@ -94,7 +86,7 @@ class App extends Component {
           <Route
             path="/contact"
             render={() => (
-              <MainLayout currentUser={currentUser}>
+              <MainLayout>
                 <ContactUs />
               </MainLayout>
             )}
@@ -102,7 +94,7 @@ class App extends Component {
           <Route
             path="/cart"
             render={() => (
-              <MainLayout currentUser={currentUser}>
+              <MainLayout>
                 <Cart />
               </MainLayout>
             )}
@@ -110,7 +102,7 @@ class App extends Component {
           <Route
             path="/wishlist"
             render={() => (
-              <MainLayout currentUser={currentUser}>
+              <MainLayout>
                 <Wishlist />
               </MainLayout>
             )}
@@ -121,7 +113,7 @@ class App extends Component {
               currentUser ? (
                 <Redirect to="/" />
               ) : (
-                <MainLayout currentUser={currentUser}>
+                <MainLayout>
                   <SignIn />
                 </MainLayout>
               )
@@ -133,7 +125,7 @@ class App extends Component {
               currentUser ? (
                 <Redirect to="/" />
               ) : (
-                <MainLayout currentUser={currentUser}>
+                <MainLayout>
                   <Register />
                 </MainLayout>
               )
@@ -145,7 +137,7 @@ class App extends Component {
               currentUser ? (
                 <Redirect to="/" />
               ) : (
-                <MainLayout currentUser={currentUser}>
+                <MainLayout>
                   <ResetPassword />
                 </MainLayout>
               )
@@ -157,4 +149,12 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
