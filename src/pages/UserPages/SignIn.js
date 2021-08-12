@@ -7,7 +7,6 @@ import FormInput from "../../components/Forms/FormInput";
 import {
   emailSignInStart,
   signInWithGoogle,
-  logoutUser,
 } from "../../redux/User/user.action";
 
 const mapState = ({ user }) => ({

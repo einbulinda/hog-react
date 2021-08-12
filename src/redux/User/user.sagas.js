@@ -6,7 +6,7 @@ import {
   getCurrentUser,
 } from "../../firebase/utils";
 import userTypes from "./User.Types";
-import { signInSuccess } from "./user.action";
+import { signInSuccess, signOutUserSuccess } from "./user.action";
 
 export function* getSnapshotFromUserAuth(user) {
   try {
@@ -59,6 +59,23 @@ export function* onCheckUserSession() {
   yield takeLatest(userTypes.CHECK_USER_SESSION, isUserAuthenticated);
 }
 
+export function* signOutUser() {
+  try {
+    yield auth.signOut();
+    yield put(signOutUserSuccess());
+  } catch (error) {
+    // console.log(error);
+  }
+}
+
+export function* onSignOutUserStart() {
+  yield takeLatest(userTypes.SIGN_OUT_USER_START, signOutUser);
+}
+
 export default function* userSaga() {
-  yield all([call(onEmailSignInStart), call(onCheckUserSession)]);
+  yield all([
+    call(onEmailSignInStart),
+    call(onCheckUserSession),
+    call(onSignOutUserStart),
+  ]);
 }

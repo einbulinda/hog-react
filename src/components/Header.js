@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { auth } from "../firebase/utils";
 import Logo from "../assets/logos/mainLogoTxtWhite.png";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Container,
   Form,
@@ -11,13 +10,19 @@ import {
   NavDropdown,
 } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
+import { signOutUserStart } from "../redux/User/user.action";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
 });
 
 const Header = (props) => {
+  const dispatch = useDispatch();
   const { currentUser } = useSelector(mapState);
+
+  const signOut = () => {
+    dispatch(signOutUserStart());
+  };
 
   return (
     <header>
@@ -86,7 +91,7 @@ const Header = (props) => {
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item to="#" onClick={() => auth.signOut()}>
+                  <NavDropdown.Item onClick={() => signOut()}>
                     Logout
                   </NavDropdown.Item>
                 </NavDropdown>
