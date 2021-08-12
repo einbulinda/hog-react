@@ -1,24 +1,33 @@
 import { auth, GoogleProvider, handleUserProfile } from "../../firebase/utils";
 import userTypes from "./User.Types";
 
+export const emailSignInStart = (userCredentials) => ({
+  type: userTypes.EMAIL_SIGN_IN_START,
+  payload: userCredentials,
+});
+
+export const signInSuccess = (user) => ({
+  type: userTypes.SIGN_IN_SUCCESS,
+  payload: user,
+});
+
+// Persist user auth status in our App
+export const checkUserSession = () => ({
+  type: userTypes.CHECK_USER_SESSION,
+});
+
+// OLD ACTIONS
+
 export const setCurrentUser = (user) => ({
   type: userTypes.SET_CURRENT_USER,
   payload: user,
 });
 
-export const signInUser =
-  ({ email, password }) =>
-  async (dispatch) => {
-    try {
-      await auth.signInWithEmailAndPassword(email, password);
-      dispatch({
-        type: userTypes.SIGN_IN_SUCCESS,
-        payload: true,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+// export const signInUser =
+//   ({ email, password }) =>
+//   async (dispatch) => {
+
+//   };
 
 export const registerUser =
   ({ displayName, email, password, confirmPassword }) =>

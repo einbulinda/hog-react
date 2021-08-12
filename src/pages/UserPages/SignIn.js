@@ -5,17 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import FormInput from "../../components/Forms/FormInput";
 import {
-  signInUser,
+  emailSignInStart,
   signInWithGoogle,
   logoutUser,
 } from "../../redux/User/user.action";
 
 const mapState = ({ user }) => ({
-  signInSuccess: user.signInSuccess,
+  currentUser: user.currentUser,
 });
 
 const SignIn = (props) => {
-  const { signInSuccess } = useSelector(mapState);
+  const { currentUser } = useSelector(mapState);
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,16 +26,15 @@ const SignIn = (props) => {
   };
 
   useEffect(() => {
-    if (signInSuccess) {
+    if (currentUser) {
       resetForm();
-      dispatch(logoutUser());
       props.history.push("/");
     }
-  }, [signInSuccess]);
+  }, [currentUser]);
 
   const handleSignin = (e) => {
     e.preventDefault();
-    dispatch(signInUser({ email, password }));
+    dispatch(emailSignInStart({ email, password }));
   };
 
   const handleGoogleSignin = () => {
