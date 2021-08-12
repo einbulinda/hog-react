@@ -1,15 +1,36 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Card, Container, Form, ListGroup } from "react-bootstrap";
 import { Link, withRouter } from "react-router-dom";
 import FormInput from "../../components/Forms/FormInput";
-import { auth, handleUserProfile } from "../../firebase/utils";
+import { registerUser } from "../../redux/User/user.action";
+import { useDispatch, useSelector } from "react-redux";
+
+const mapState = ({ user }) => ({
+  registerUserSuccess: user.registerUserSuccess,
+  registerUserError: user.registerUserError,
+});
 
 const Register = (props) => {
+  const { registerUserSuccess, registerUserError } = useSelector(mapState);
+  const dispatch = useDispatch();
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+
+  useEffect(() => {
+    if (registerUserSuccess) {
+      resetForm();
+      props.history.push("/");
+    }
+  }, [registerUserSuccess]);
+
+  useEffect(() => {
+    if (Array.isArray(registerUserError) && registerUserError.length > 0) {
+      setErrors(registerUserError);
+    }
+  }, [registerUserError]);
 
   const resetForm = () => {
     setDisplayName("");
@@ -19,26 +40,16 @@ const Register = (props) => {
     setErrors([]);
   };
 
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-
-    if (password !== confirmPassword) {
-      const err = ["Passwords provided do not match."];
-      setErrors([err]);
-      return;
-    }
-
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(
+    dispatch(
+      registerUser({
+        displayName,
         email,
-        password
-      );
-      await handleUserProfile(user, { displayName });
-      resetForm();
-      props.history.push("/");
-    } catch (error) {
-      console.log(error);
-    }
+        password,
+        confirmPassword,
+      })
+    );
   };
 
   return (

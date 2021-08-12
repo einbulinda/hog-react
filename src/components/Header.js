@@ -1,4 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { auth } from "../firebase/utils";
+import Logo from "../assets/logos/mainLogoTxtWhite.png";
+import { useSelector } from "react-redux";
 import {
   Container,
   Form,
@@ -8,13 +11,13 @@ import {
   NavDropdown,
 } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-import { connect } from "react-redux";
-import { auth } from "../firebase/utils";
 
-import Logo from "../assets/logos/mainLogoTxtWhite.png";
+const mapState = ({ user }) => ({
+  currentUser: user.currentUser,
+});
 
 const Header = (props) => {
-  const { currentUser } = props;
+  const { currentUser } = useSelector(mapState);
 
   return (
     <header>
@@ -105,8 +108,4 @@ Header.defaultProps = {
   currentUser: null,
 };
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser,
-});
-
-export default connect(mapStateToProps, null)(Header);
+export default Header;
