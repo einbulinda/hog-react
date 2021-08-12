@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { signInWithGoogle } from "../../firebase/utils";
+// import { signInWithGoogle } from "../../firebase/utils";
 import { Link, withRouter } from "react-router-dom";
 import FormInput from "../../components/Forms/FormInput";
-import { signInUser } from "../../redux/User/user.action";
+import {
+  signInUser,
+  signInWithGoogle,
+  logoutUser,
+} from "../../redux/User/user.action";
 
 const mapState = ({ user }) => ({
   signInSuccess: user.signInSuccess,
@@ -24,6 +28,7 @@ const SignIn = (props) => {
   useEffect(() => {
     if (signInSuccess) {
       resetForm();
+      dispatch(logoutUser());
       props.history.push("/");
     }
   }, [signInSuccess]);
@@ -31,6 +36,10 @@ const SignIn = (props) => {
   const handleSignin = (e) => {
     e.preventDefault();
     dispatch(signInUser({ email, password }));
+  };
+
+  const handleGoogleSignin = () => {
+    dispatch(signInWithGoogle());
   };
 
   return (
@@ -65,7 +74,7 @@ const SignIn = (props) => {
             size="lg"
             variant="dark"
             className="d-block mx-auto px-4 my-3"
-            onClick={signInWithGoogle}
+            onClick={handleGoogleSignin}
           >
             Sign in with Google
           </Button>

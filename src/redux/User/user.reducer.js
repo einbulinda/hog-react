@@ -40,6 +40,15 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         resetUserError: action.payload,
       };
+    case userTypes.LOGOUT_USER_SUCCESS:
+      return {
+        ...state,
+        signInSuccess: false,
+        registerUserSuccess: false,
+        registerUserError: [],
+        resetUserSuccess: false,
+        resetUserError: [],
+      };
     default:
       return state;
   }

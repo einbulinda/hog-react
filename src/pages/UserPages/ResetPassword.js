@@ -3,7 +3,7 @@ import { Button, Card, Container, Form, ListGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import FormInput from "../../components/Forms/FormInput";
-import { resetUser } from "../../redux/User/user.action";
+import { logoutUser, resetUser } from "../../redux/User/user.action";
 
 const mapState = ({ user }) => ({
   resetUserSuccess: user.resetUserSuccess,
@@ -19,6 +19,7 @@ const ResetPassword = (props) => {
   useEffect(() => {
     if (resetUserSuccess) {
       alert("Password reset link sent successfully.");
+      dispatch(logoutUser());
       props.history.push("/login");
     }
   }, [resetUserSuccess]);

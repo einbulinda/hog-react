@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Button, Card, Container, Form, ListGroup } from "react-bootstrap";
 import { Link, withRouter } from "react-router-dom";
 import FormInput from "../../components/Forms/FormInput";
-import { registerUser } from "../../redux/User/user.action";
+import { logoutUser, registerUser } from "../../redux/User/user.action";
 import { useDispatch, useSelector } from "react-redux";
 
 const mapState = ({ user }) => ({
@@ -22,6 +22,7 @@ const Register = (props) => {
   useEffect(() => {
     if (registerUserSuccess) {
       resetForm();
+      dispatch(logoutUser());
       props.history.push("/");
     }
   }, [registerUserSuccess]);
