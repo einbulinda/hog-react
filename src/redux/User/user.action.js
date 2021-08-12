@@ -45,3 +45,30 @@ export const registerUser =
       console.log(error);
     }
   };
+
+export const resetUser =
+  ({ email }) =>
+  async (dispatch) => {
+    try {
+      const config = {
+        url: "http://localhost:3000/login",
+      };
+      await auth
+        .sendPasswordResetEmail(email, config)
+        .then(() => {
+          dispatch({
+            type: userTypes.RESET_USER_SUCCESS,
+            payload: true,
+          });
+        })
+        .catch(() => {
+          const err = ["Email not registered. Lets register!"];
+          dispatch({
+            type: userTypes.RESET_USER_ERROR,
+            payload: err,
+          });
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };

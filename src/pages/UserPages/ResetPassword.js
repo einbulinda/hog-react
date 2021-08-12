@@ -1,34 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Card, Container, Form, ListGroup } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import FormInput from "../../components/Forms/FormInput";
-import { auth } from "../../firebase/utils";
+import { resetUser } from "../../redux/User/user.action";
+
+const mapState = ({ user }) => ({
+  resetUserSuccess: user.resetUserSuccess,
+  resetUserError: user.resetUserError,
+});
 
 const ResetPassword = (props) => {
+  const { resetUserSuccess, resetUserError } = useSelector(mapState);
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState([]);
 
-  const handleForgotPassword = async (e) => {
-    e.preventDefault();
-
-    try {
-      const config = {
-        url: "http://localhost:3000/login",
-      };
-
-      await auth
-        .sendPasswordResetEmail(email, config)
-        .then(() => {
-          alert("Password reset link sent successfully.");
-          this.props.history.push("/login");
-        })
-        .catch(() => {
-          const err = ["Email not registered. Lets register!"];
-          setErrors([err]);
-        });
-    } catch (error) {
-      console.log(error.message);
+  useEffect(() => {
+    if (resetUserSuccess) {
+      alert("Password reset link sent successfully.");
+      props.history.push("/login");
     }
+  }, [resetUserSuccess]);
+
+  useEffect(() => {
+    if (Array.isArray(resetUserError) && resetUserError.length > 0) {
+      setErrors(resetUserError);
+    }
+  }, [resetUserError]);
+
+  const handleForgotPassword = (e) => {
+    e.preventDefault();
+    dispatch(
+      resetUser({
+        email,
+      })
+    );
   };
 
   return (
