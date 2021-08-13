@@ -6,11 +6,18 @@ import {
   getCurrentUser,
 } from "../../firebase/utils";
 import userTypes from "./User.Types";
-import { signInSuccess, signOutUserSuccess } from "./user.action";
+import {
+  signInSuccess,
+  signOutUserSuccess,
+  signUpUserError,
+} from "./user.action";
 
-export function* getSnapshotFromUserAuth(user) {
+export function* getSnapshotFromUserAuth(user, additionalData = {}) {
   try {
-    const userRef = yield call(handleUserProfile, { userAuth: user });
+    const userRef = yield call(handleUserProfile, {
+      userAuth: user,
+      additionalData,
+    });
     const snapshot = yield userRef.get();
     yield put(
       signInSuccess({
@@ -72,10 +79,32 @@ export function* onSignOutUserStart() {
   yield takeLatest(userTypes.SIGN_OUT_USER_START, signOutUser);
 }
 
+export function* signUpUser({
+  payload: { displayName, email, password, confirmPassword },
+}) {
+  if (password !== confirmPassword) {
+    const err = ["Passwords provided do not match."];
+    yield put(signUpUserError(err));
+    return; //if they don't match, get out of function and don't proceed to try-catch
+  }
+  try {
+    const { user } = yield auth.createUserWithEmailAndPassword(email, password);
+    const additionalData = { displayName };
+    yield getSnapshotFromUserAuth(user, additionalData);
+  } catch (error) {
+    // console.log(error);
+  }
+}
+
+export function* onSignUpUserStart() {
+  yield takeLatest(userTypes.SIGN_UP_USER_START, signUpUser);
+}
+
 export default function* userSaga() {
   yield all([
     call(onEmailSignInStart),
     call(onCheckUserSession),
     call(onSignOutUserStart),
+    call(onSignUpUserStart),
   ]);
 }

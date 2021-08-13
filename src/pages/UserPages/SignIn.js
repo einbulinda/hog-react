@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-// import { signInWithGoogle } from "../../firebase/utils";
 import { Link, withRouter } from "react-router-dom";
 import FormInput from "../../components/Forms/FormInput";
 import {

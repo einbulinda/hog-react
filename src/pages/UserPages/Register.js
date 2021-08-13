@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 import { Button, Card, Container, Form, ListGroup } from "react-bootstrap";
 import { Link, withRouter } from "react-router-dom";
 import FormInput from "../../components/Forms/FormInput";
-import { logoutUser, registerUser } from "../../redux/User/user.action";
+import { signUpUserStart } from "../../redux/User/user.action";
 import { useDispatch, useSelector } from "react-redux";
 
 const mapState = ({ user }) => ({
-  registerUserSuccess: user.registerUserSuccess,
-  registerUserError: user.registerUserError,
+  currentUser: user.currentUser,
+  userError: user.userError,
 });
 
 const Register = (props) => {
-  const { registerUserSuccess, registerUserError } = useSelector(mapState);
+  const { currentUser, userError } = useSelector(mapState);
   const dispatch = useDispatch();
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,18 +20,17 @@ const Register = (props) => {
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
-    if (registerUserSuccess) {
+    if (currentUser) {
       resetForm();
-      dispatch(logoutUser());
       props.history.push("/");
     }
-  }, [registerUserSuccess]);
+  }, [currentUser]);
 
   useEffect(() => {
-    if (Array.isArray(registerUserError) && registerUserError.length > 0) {
-      setErrors(registerUserError);
+    if (Array.isArray(userError) && userError.length > 0) {
+      setErrors(userError);
     }
-  }, [registerUserError]);
+  }, [userError]);
 
   const resetForm = () => {
     setDisplayName("");
@@ -44,7 +43,7 @@ const Register = (props) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      registerUser({
+      signUpUserStart({
         displayName,
         email,
         password,
