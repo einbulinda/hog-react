@@ -115,6 +115,19 @@ export function* onResetUserStart() {
   yield takeLatest(userTypes.RESET_USER_START, resetUserPassword);
 }
 
+export function* googleSignIn() {
+  try {
+    const { user } = yield auth.signInWithPopup(GoogleProvider);
+    yield getSnapshotFromUserAuth(user);
+  } catch (error) {
+    // console.log(error);
+  }
+}
+
+export function* onGoogleSignInStart() {
+  yield takeLatest(userTypes.GOOGLE_SIGN_IN_START, googleSignIn);
+}
+
 export default function* userSaga() {
   yield all([
     call(onEmailSignInStart),
@@ -122,5 +135,6 @@ export default function* userSaga() {
     call(onSignOutUserStart),
     call(onSignUpUserStart),
     call(onResetUserStart),
+    call(onGoogleSignInStart),
   ]);
 }
