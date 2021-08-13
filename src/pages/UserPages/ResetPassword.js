@@ -3,37 +3,36 @@ import { Button, Card, Container, Form, ListGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import FormInput from "../../components/Forms/FormInput";
-import { logoutUser, resetUser } from "../../redux/User/user.action";
+import { resetUserStart, resetUserState } from "../../redux/User/user.action";
 
 const mapState = ({ user }) => ({
-  resetUserSuccess: user.resetUserSuccess,
-  resetUserError: user.resetUserError,
+  passwordResetSuccess: user.passwordResetSuccess,
+  userError: user.userError,
 });
 
 const ResetPassword = (props) => {
-  const { resetUserSuccess, resetUserError } = useSelector(mapState);
+  const { passwordResetSuccess, userError } = useSelector(mapState);
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState([]);
 
   useEffect(() => {
-    if (resetUserSuccess) {
-      alert("Password reset link sent successfully.");
-      dispatch(logoutUser());
+    if (passwordResetSuccess) {
+      dispatch(resetUserState());
       props.history.push("/login");
     }
-  }, [resetUserSuccess]);
+  }, [passwordResetSuccess]);
 
   useEffect(() => {
-    if (Array.isArray(resetUserError) && resetUserError.length > 0) {
-      setErrors(resetUserError);
+    if (Array.isArray(userError) && userError.length > 0) {
+      setErrors(userError);
     }
-  }, [resetUserError]);
+  }, [userError]);
 
   const handleForgotPassword = (e) => {
     e.preventDefault();
     dispatch(
-      resetUser({
+      resetUserStart({
         email,
       })
     );

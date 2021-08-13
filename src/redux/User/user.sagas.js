@@ -9,8 +9,10 @@ import userTypes from "./User.Types";
 import {
   signInSuccess,
   signOutUserSuccess,
-  signUpUserError,
+  userError,
+  resetUserSuccess,
 } from "./user.action";
+import { handleResetPasswordAPI } from "./user.helpers";
 
 export function* getSnapshotFromUserAuth(user, additionalData = {}) {
   try {
@@ -84,7 +86,7 @@ export function* signUpUser({
 }) {
   if (password !== confirmPassword) {
     const err = ["Passwords provided do not match."];
-    yield put(signUpUserError(err));
+    yield put(userError(err));
     return; //if they don't match, get out of function and don't proceed to try-catch
   }
   try {
@@ -100,11 +102,25 @@ export function* onSignUpUserStart() {
   yield takeLatest(userTypes.SIGN_UP_USER_START, signUpUser);
 }
 
+export function* resetUserPassword({ payload: { email } }) {
+  try {
+    yield call(handleResetPasswordAPI, email);
+    yield put(resetUserSuccess());
+  } catch (err) {
+    yield put(userError(err));
+  }
+}
+
+export function* onResetUserStart() {
+  yield takeLatest(userTypes.RESET_USER_START, resetUserPassword);
+}
+
 export default function* userSaga() {
   yield all([
     call(onEmailSignInStart),
     call(onCheckUserSession),
     call(onSignOutUserStart),
     call(onSignUpUserStart),
+    call(onResetUserStart),
   ]);
 }

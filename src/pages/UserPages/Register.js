@@ -22,6 +22,7 @@ const Register = (props) => {
   useEffect(() => {
     if (currentUser) {
       resetForm();
+      // alert("Password reset link has been sent to registered email.");
       props.history.push("/");
     }
   }, [currentUser]);
@@ -115,7 +116,7 @@ const Register = (props) => {
           </Form>
           <Card.Text className="my-3">
             <span>
-              <Link to="/account">Sign In </Link>
+              <Link to="/login">Sign In </Link>
             </span>
           </Card.Text>
         </Card.Body>

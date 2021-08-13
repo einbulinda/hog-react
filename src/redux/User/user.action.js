@@ -29,9 +29,23 @@ export const signUpUserStart = (userCredentials) => ({
   payload: userCredentials,
 });
 
-export const signUpUserError = (err) => ({
-  type: userTypes.SIGN_UP_USER_ERROR,
+export const userError = (err) => ({
+  type: userTypes.USER_ERROR,
   payload: err,
+});
+
+export const resetUserStart = (userCredentials) => ({
+  type: userTypes.RESET_USER_START,
+  payload: userCredentials,
+});
+
+export const resetUserSuccess = () => ({
+  type: userTypes.RESET_USER_SUCCESS,
+  payload: true,
+});
+
+export const resetUserState = () => ({
+  type: userTypes.RESET_USER_STATE,
 });
 
 // OLD ACTIONS
@@ -40,37 +54,6 @@ export const setCurrentUser = (user) => ({
   type: userTypes.SET_CURRENT_USER,
   payload: user,
 });
-
-// export const registerUser =
-//   ({ displayName, email, password, confirmPassword }) =>
-//   async (dispatch) => {};
-
-export const resetUser =
-  ({ email }) =>
-  async (dispatch) => {
-    try {
-      const config = {
-        url: "http://localhost:3000/login",
-      };
-      await auth
-        .sendPasswordResetEmail(email, config)
-        .then(() => {
-          dispatch({
-            type: userTypes.RESET_USER_SUCCESS,
-            payload: true,
-          });
-        })
-        .catch(() => {
-          const err = ["Email not registered. Lets register!"];
-          dispatch({
-            type: userTypes.RESET_USER_ERROR,
-            payload: err,
-          });
-        });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
 export const signInWithGoogle = () => async (dispatch) => {
   try {
