@@ -6,6 +6,7 @@ import { useEffect } from "react";
 
 // higher order component
 import WithAuth from "./hoc/WithAuth";
+import WithAdminAuth from "./hoc/WithAdminAuth";
 
 // Layouts
 import MainLayout from "./layouts/MainLayout";
@@ -21,7 +22,7 @@ import Wishlist from "./pages/Wishlist.js";
 import SignIn from "./pages/UserPages/SignIn";
 import Register from "./pages/UserPages/Register";
 import ResetPassword from "./pages/UserPages/ResetPassword";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/admin/Dashboard";
 import MyAccount from "./pages/UserPages/MyAccount";
 
 const App = (props) => {
@@ -118,11 +119,11 @@ const App = (props) => {
         <Route
           path="/dashboard"
           render={() => (
-            <WithAuth>
+            <WithAdminAuth>
               <MainLayout>
                 <Dashboard />
               </MainLayout>
-            </WithAuth>
+            </WithAdminAuth>
           )}
         />
         <Route

@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
 import { signOutUserStart } from "../redux/User/user.action";
+import AdminToolbar from "./AdminToolbar";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -55,6 +56,7 @@ const Header = (props) => {
               <NavLink className="nav-link px-4" to="/contact">
                 Reach Out
               </NavLink>
+              <AdminToolbar />
             </Nav>
             <Nav>
               <Form className="d-flex">
