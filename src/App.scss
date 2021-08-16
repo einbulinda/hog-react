@@ -21,6 +21,7 @@ body {
 .App {
   height: 100%;
 }
+
 #root > .App > div {
   min-height: 100%;
   display: grid;
@@ -37,7 +38,7 @@ body {
 }
 body {
   font-family: "Roboto", sans-serif;
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   font-weight: 400;
   line-height: 1;
 }
@@ -59,4 +60,19 @@ a:hover {
   -webkit-transition: all 0.4s ease-in-out;
   -moz-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
+}
+
+.sidenav,
+.dashboard {
+  height: 100%;
+}
+.sidenav {
+  background-color: black;
+}
+.sidenav a {
+  color: #ffff;
+}
+
+.sidenav a.active {
+  color: #da1414;
 }

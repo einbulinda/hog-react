@@ -22,8 +22,11 @@ import Wishlist from "./pages/Wishlist.js";
 import SignIn from "./pages/UserPages/SignIn";
 import Register from "./pages/UserPages/Register";
 import ResetPassword from "./pages/UserPages/ResetPassword";
-import Dashboard from "./pages/admin/Dashboard";
 import MyAccount from "./pages/UserPages/MyAccount";
+import AdminLayout from "./layouts/AdminLayout";
+import Admin from "./pages/admin/Admin";
+import NotFound from "./pages/NotFound";
+import AddProduct from "./pages/admin/products/AddProduct";
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -117,12 +120,12 @@ const App = (props) => {
           )}
         />
         <Route
-          path="/dashboard"
+          path="/admin-all-products"
           render={() => (
             <WithAdminAuth>
-              <MainLayout>
-                <Dashboard />
-              </MainLayout>
+              <AdminLayout>
+                <Admin />
+              </AdminLayout>
             </WithAdminAuth>
           )}
         />
@@ -134,6 +137,38 @@ const App = (props) => {
                 <MyAccount />
               </MainLayout>
             </WithAuth>
+          )}
+        />
+        {/* Admin Routes */}
+        <Route
+          exact
+          path="/admin"
+          render={() => (
+            <WithAdminAuth>
+              <AdminLayout>
+                <Admin />
+              </AdminLayout>
+            </WithAdminAuth>
+          )}
+        />
+
+        <Route
+          path="/admin/add-products"
+          render={() => (
+            <WithAdminAuth>
+              <AdminLayout>
+                <AddProduct />
+              </AdminLayout>
+            </WithAdminAuth>
+          )}
+        />
+        {/* Catch all route. Always at bottom */}
+        <Route
+          path="*"
+          render={() => (
+            <MainLayout>
+              <NotFound />
+            </MainLayout>
           )}
         />
       </Switch>

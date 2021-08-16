@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Logo from "../assets/logos/mainLogoTxtWhite.png";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  Button,
   Container,
   Form,
   Image,
@@ -12,6 +13,7 @@ import {
 import { Link, NavLink } from "react-router-dom";
 import { signOutUserStart } from "../redux/User/user.action";
 import AdminToolbar from "./AdminToolbar";
+import { Search } from "react-bootstrap-icons";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -62,11 +64,14 @@ const Header = (props) => {
               <Form className="d-flex">
                 <Form.Control
                   type="search"
-                  placeholder="Search"
+                  placeholder="Search products"
                   className="mr-2"
                   aria-label="Search"
                   size="lg"
                 />
+                <Button variant="dark">
+                  <Search size={20} />
+                </Button>
               </Form>
               <NavLink className="nav-link px-4" to="/cart">
                 <FontAwesomeIcon icon="shopping-cart" />{" "}
@@ -83,17 +88,19 @@ const Header = (props) => {
               {currentUser && (
                 <NavDropdown
                   menuVariant="dark"
-                  drop="start"
+                  className="dropdown-menu-end"
                   title={currentUser.displayName}
                   id="collasible-nav-dropdown"
                 >
                   <NavDropdown.Item>
-                    <NavLink className="nav-link" to="/my-account">
+                    <NavLink className="nav-link fs-4" to="/my-account">
                       My Account
                     </NavLink>
                   </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item onClick={() => signOut()}>
+                  <NavDropdown.Item
+                    className="pl-3 fs-4"
+                    onClick={() => signOut()}
+                  >
                     Logout
                   </NavDropdown.Item>
                 </NavDropdown>

@@ -12,7 +12,7 @@ const AdminToolbar = (props) => {
   const isAdmin = checkUserIsAdmin(currentUser);
   if (!isAdmin) return null;
   return (
-    <NavLink className="nav-link px-4" to="/dashboard">
+    <NavLink className="nav-link px-4" to="/admin">
       My Admin
     </NavLink>
   );
