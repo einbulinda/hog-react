@@ -1,20 +1,19 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../components/ProductCard";
-import useFetch from "../useFetch";
+import { fetchProductsStart } from "../redux/Products/product.actions";
+
+const mapState = ({ productsData }) => ({ products: productsData.products });
 
 const Home = () => {
-  const {
-    data: products,
-    isLoading,
-    error,
-  } = useFetch("http://localhost:8000/products");
+  const dispatch = useDispatch();
+  const { products } = useSelector(mapState);
 
-  return (
-    <main>
-      {error && <div>{error}</div>}
-      {isLoading && <div>Loading...</div>}
-      {products && <ProductCard products={products} />}
-    </main>
-  );
+  useEffect(() => {
+    dispatch(fetchProductsStart());
+  }, []);
+
+  return <main>{products && <ProductCard products={products} />}</main>;
 };
 
 export default Home;

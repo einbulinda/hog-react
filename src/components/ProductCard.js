@@ -7,9 +7,9 @@ const ProductCard = ({ products }) => {
         <Card className="m-3" style={{ width: "22rem" }} key={product.id}>
           <Card.Img variant="top" src={product.image} />
           <Card.Body className="mb-0">
-            <Card.Title>{product.name}</Card.Title>
+            <Card.Title>{product.productName}</Card.Title>
             <Card.Text>{product.category}</Card.Text>
-            <Card.Text>Ksh. {product.price}</Card.Text>
+            <Card.Text>Ksh. {product.retailPrice}</Card.Text>
             <Card.Text>{product.rating} Rating</Card.Text>
             <Card.Text>{product.reviews} Reviews</Card.Text>
             <Button variant="primary"> (icon)Add To Cart</Button>
