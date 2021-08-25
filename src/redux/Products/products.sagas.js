@@ -14,7 +14,7 @@ export function* addProduct({
     stockQuantity,
     attributes,
     description,
-    images,
+    imageUrl,
   },
 }) {
   try {
@@ -28,7 +28,7 @@ export function* addProduct({
       stockQuantity,
       attributes,
       description,
-      images,
+      imageUrl,
       productAdminUserUID: auth.currentUser.uid,
       createdDate: timestamp,
     });

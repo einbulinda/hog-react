@@ -14,6 +14,7 @@ import {
   addProductStart,
   fetchProductsStart,
 } from "../../../redux/Products/product.actions";
+import { storageRef } from "../../../firebase/utils";
 
 const mapState = ({ productsData }) => ({ products: productsData.products });
 
@@ -40,7 +41,7 @@ const AddProduct = (props) => {
   const [stockQuantity, setStockQuantity] = useState(0);
   const [attributes, setAttributes] = useState([]);
   const [description, setDescription] = useState("");
-  const [images, setImages] = useState("");
+  const [imageUrl, setImageUrl] = useState(null);
 
   useEffect(() => {
     dispatch(fetchProductsStart());
@@ -59,7 +60,18 @@ const AddProduct = (props) => {
     setStockQuantity(0);
     setAttributes([]);
     setDescription("");
-    setImages("");
+    setImageUrl(null);
+  };
+
+  const onFileChange = async (e) => {
+    const file = e.target.files[0];
+    const fileRef = storageRef.child(file.name);
+
+    // saving file to firebase storage
+    await fileRef.put(file);
+
+    // setting the file URL
+    setImageUrl(await fileRef.getDownloadURL());
   };
 
   const saveProduct = (e) => {
@@ -75,11 +87,10 @@ const AddProduct = (props) => {
         stockQuantity,
         attributes,
         description,
-        images,
+        imageUrl,
       })
     );
     resetForm();
-    handleClose();
   };
 
   return (
@@ -240,15 +251,14 @@ const AddProduct = (props) => {
                   </Form.Group>
                 </Row>
                 <Row>
-                  <Form.Group className="mb-3" controlId="formMultipleImages">
-                    <Form.Label>Product Images</Form.Label>
+                  <Form.Group className="mb-3" controlId="formImage">
+                    <Form.Label>Product Image</Form.Label>
                     <Form.Control
                       size="lg"
                       type="file"
-                      multiple
-                      value={images}
+                      // value={imageUrl}
                       required
-                      onChange={(e) => setImages(e.target.value)}
+                      onChange={onFileChange}
                     />
                   </Form.Group>
                 </Row>
@@ -312,12 +322,12 @@ const AddProduct = (props) => {
                       retailPrice,
                       category,
                       stockQuantity,
-                      images,
+                      imageUrl,
                     } = product;
                     return (
                       <tr key={index}>
                         <td>
-                          <Image src={images} thumbnail />
+                          <Image src={imageUrl} thumbnail width="100" />
                         </td>
                         <td>{productName}</td>
                         <td>{retailPrice}</td>

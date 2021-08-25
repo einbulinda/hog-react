@@ -5,7 +5,7 @@ const ProductCard = ({ products }) => {
     <div className="d-flex p-2 m-2">
       {products.map((product) => (
         <Card className="m-3" style={{ width: "22rem" }} key={product.id}>
-          <Card.Img variant="top" src={product.image} />
+          <Card.Img variant="top" src={product.imageUrl} />
           <Card.Body className="mb-0">
             <Card.Title>{product.productName}</Card.Title>
             <Card.Text>{product.category}</Card.Text>
