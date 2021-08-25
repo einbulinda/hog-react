@@ -34,3 +34,17 @@ export const handleFetchProducts = () => {
       });
   });
 };
+
+export const handleDeleteProduct = (documentID) => {
+  return new Promise((resolve, reject) => {
+    ref
+      .doc(documentID)
+      .delete()
+      .then(() => {
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};

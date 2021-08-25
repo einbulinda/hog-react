@@ -10,9 +10,12 @@ import {
   Table,
   Image,
 } from "react-bootstrap";
+import { MdDelete } from "react-icons/md";
+import { AiOutlineEdit } from "react-icons/ai";
 import {
   addProductStart,
   fetchProductsStart,
+  deleteProductStart,
 } from "../../../redux/Products/product.actions";
 import { storageRef } from "../../../firebase/utils";
 
@@ -310,14 +313,16 @@ const AddProduct = (props) => {
                   <tr>
                     <th>Image</th>
                     <th>Product Name</th>
-                    <th>Retail Price</th>
+                    <th>Price</th>
                     <th>Category</th>
-                    <th>Quantity in Hand</th>
+                    <th>Quantity</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {products.map((product, index) => {
                     const {
+                      documentID,
                       productName,
                       retailPrice,
                       category,
@@ -333,6 +338,24 @@ const AddProduct = (props) => {
                         <td>{retailPrice}</td>
                         <td>{category}</td>
                         <td>{stockQuantity}</td>
+                        <td>
+                          <Button
+                            variant="outline-danger"
+                            className="fs-2 py-0 mx-2"
+                            onClick={() =>
+                              dispatch(deleteProductStart(documentID))
+                            }
+                          >
+                            <MdDelete />
+                          </Button>
+                          <Button
+                            variant="outline-primary"
+                            className="fs-2 py-0 mx-2"
+                            disabled
+                          >
+                            <AiOutlineEdit />
+                          </Button>
+                        </td>
                       </tr>
                     );
                   })}
