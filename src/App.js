@@ -28,6 +28,7 @@ import Admin from "./pages/admin/Admin";
 import NotFound from "./pages/NotFound";
 import AddProduct from "./pages/admin/products/AddProduct";
 import Categories from "./pages/admin/categories/Categories";
+import Search from "./pages/Search";
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -45,6 +46,15 @@ const App = (props) => {
           render={() => (
             <MainLayout>
               <Home />
+            </MainLayout>
+          )}
+        />
+        <Route
+          exact
+          path="/search"
+          render={() => (
+            <MainLayout>
+              <Search />
             </MainLayout>
           )}
         />
