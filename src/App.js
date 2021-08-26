@@ -27,6 +27,7 @@ import AdminLayout from "./layouts/AdminLayout";
 import Admin from "./pages/admin/Admin";
 import NotFound from "./pages/NotFound";
 import AddProduct from "./pages/admin/products/AddProduct";
+import Categories from "./pages/admin/categories/Categories";
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -151,9 +152,20 @@ const App = (props) => {
             </WithAdminAuth>
           )}
         />
+        <Route
+          exact
+          path="/admin/categories"
+          render={() => (
+            <WithAdminAuth>
+              <AdminLayout>
+                <Categories />
+              </AdminLayout>
+            </WithAdminAuth>
+          )}
+        />
 
         <Route
-          path="/admin/add-products"
+          path="/admin/products"
           render={() => (
             <WithAdminAuth>
               <AdminLayout>

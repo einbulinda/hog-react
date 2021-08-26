@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { People } from "react-bootstrap-icons";
 import { HiOutlineViewGridAdd } from "react-icons/hi";
 import { BiLogOut, BiMailSend } from "react-icons/bi";
+import { CgListTree } from "react-icons/cg";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import VerticalNav from "../components/VerticalNav";
@@ -23,10 +24,14 @@ const AdminLayout = (props) => {
         <Col md="2" className="sidenav text-white px-3">
           <VerticalNav>
             <Row>
-              <Nav defaultActiveKey="/product-list" className="flex-column">
-                <NavLink className="nav-link" to="/admin/add-products">
+              <Nav defaultActiveKey="/admin/products" className="flex-column">
+                <NavLink className="nav-link" to="/admin/products">
                   {" "}
-                  <HiOutlineViewGridAdd /> Add Products
+                  <HiOutlineViewGridAdd /> Products
+                </NavLink>
+                <NavLink className="nav-link" to="/admin/categories">
+                  {" "}
+                  <CgListTree /> Categories
                 </NavLink>
                 <NavLink className="nav-link" to="/admin/users">
                   <People /> Users

@@ -104,7 +104,7 @@ const AddProduct = (props) => {
           <Button
             variant="dark"
             size="lg"
-            className="px-4"
+            className="mx-2 px-4"
             onClick={handleShow}
           >
             Add Products
