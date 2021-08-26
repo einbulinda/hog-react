@@ -18,23 +18,17 @@ import {
   deleteProductStart,
 } from "../../../redux/Products/product.actions";
 import { storageRef } from "../../../firebase/utils";
+import { fetchCategoriesStart } from "../../../redux/categories/category.actions";
 
-const mapState = ({ productsData }) => ({ products: productsData.products });
+const mapState = ({ productsData, categoriesData }) => ({
+  products: productsData.products,
+  categories: categoriesData.categories,
+});
 
 const AddProduct = (props) => {
   const dispatch = useDispatch();
   const [show, setShow] = useState();
-  const { products } = useSelector(mapState);
-
-  // This category can be retrieved from DB later
-  const categories = [
-    { name: "Cookware", value: "cookware" },
-    { name: "Kitchen Appliances", value: "kitchen-appliance" },
-    { name: "Bedroom Linen", value: "bedroom-linen" },
-    { name: "Utensil & Cutlery", value: "utensil-cutlery" },
-    { name: "Kitchen Storage", value: "kitchen-storage" },
-    { name: "Cleaning Equipment", value: "cleaning-equipment" },
-  ];
+  const { products, categories } = useSelector(mapState);
 
   const [productName, setProductName] = useState("");
   const [retailPrice, setRetailPrice] = useState(0);
@@ -48,6 +42,7 @@ const AddProduct = (props) => {
 
   useEffect(() => {
     dispatch(fetchProductsStart());
+    dispatch(fetchCategoriesStart());
   }, []); //empty dependency array to run only on first mounting of product
 
   const handleShow = () => setShow(true);
@@ -170,12 +165,14 @@ const AddProduct = (props) => {
                     required
                     onChange={(e) => setCategory(e.target.value)}
                   >
-                    {categories &&
-                      categories.map((category, index) => (
-                        <option value={category.value} key={index}>
-                          {category.name}
+                    {categories.map((category, index) => {
+                      const { categoryName, status } = category;
+                      return (
+                        <option key={index} value={categoryName}>
+                          {status && categoryName}
                         </option>
-                      ))}
+                      );
+                    })}
                   </Form.Select>
                 </Form.Group>
               </Col>

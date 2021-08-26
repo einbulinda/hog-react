@@ -1,13 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Col, Container, Form, Row, Table } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { addCategoryStart } from "../../../redux/categories/category.actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addCategoryStart,
+  deleteCategoryStart,
+  fetchCategoriesStart,
+} from "../../../redux/categories/category.actions";
+import { MdDelete } from "react-icons/md";
+import { AiOutlineEdit } from "react-icons/ai";
 
-const Categories = () => {
+const mapState = ({ categoriesData }) => ({
+  categories: categoriesData.categories,
+});
+
+const Categories = (props) => {
   const dispatch = useDispatch();
+  const { categories } = useSelector(mapState);
   const [categoryName, setCategoryName] = useState("");
   const [status, setStatus] = useState(true);
   const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    dispatch(fetchCategoriesStart());
+  }, []);
 
   const resetForm = () => {
     setCategoryName("");
@@ -102,12 +117,41 @@ const Categories = () => {
                 <Table striped bordered hover>
                   <thead>
                     <tr>
-                      <th>ID</th>
                       <th>Category Name</th>
                       <th>Status</th>
-                      <th>Created Date</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
+                  <tbody>
+                    {categories.map((category, index) => {
+                      const { documentID, categoryName, status } = category;
+
+                      return (
+                        <tr key={index}>
+                          <td>{categoryName}</td>
+                          <td>{status ? "Active" : "Inactive"}</td>
+                          <td>
+                            <Button
+                              variant="outline-danger"
+                              className="fs-2 py-0 mx-2"
+                              onClick={() =>
+                                dispatch(deleteCategoryStart(documentID))
+                              }
+                            >
+                              <MdDelete />
+                            </Button>
+                            <Button
+                              variant="outline-primary"
+                              className="fs-2 py-0 mx-2"
+                              disabled
+                            >
+                              <AiOutlineEdit />
+                            </Button>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
                 </Table>
               </td>
             </tr>
