@@ -1,13 +1,14 @@
 import Header from "./../components/Header";
 import Footer from "./../components/Footer";
+import React from "react";
 
 const MainLayout = (props) => {
   return (
-    <div>
+    <React.Fragment>
       <Header {...props} />
       <main>{props.children}</main>
       <Footer />
-    </div>
+    </React.Fragment>
   );
 };
 

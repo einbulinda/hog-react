@@ -11,7 +11,7 @@ const ProductCard = ({ products }) => {
 
         return (
           <Card className="m-3" style={{ width: "18rem" }} key={index}>
-            <Card.Img variant="top" src={imageUrl} fluid />
+            <Card.Img variant="top" src={imageUrl} alt={productName} fluid />
             <Card.Body className="mb-0 text-center d-flex flex-column">
               <Card.Text className="fs-2 fw-bold mt-auto">
                 {productName}
