@@ -136,28 +136,6 @@ const AddProduct = (props) => {
                 </Form.Group>
               </Col>
               <Col xs={12} sm={6}>
-                <Form.Group
-                  as={Row}
-                  className="mb-3 mt-4 pt-2"
-                  controlId="formHorizontalPrice"
-                >
-                  <Form.Label column sm={8}>
-                    Retail Price
-                  </Form.Label>{" "}
-                  <Col sm={4}>
-                    <Form.Control
-                      type="number"
-                      size="lg"
-                      value={retailPrice}
-                      required
-                      onChange={(e) => setRetailPrice(e.target.value)}
-                    />
-                  </Col>
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12} sm={6}>
                 <Form.Group className="mb-3" controlId="formGridCategory">
                   <Form.Label>Product Category</Form.Label>
                   <Form.Select
@@ -177,24 +155,51 @@ const AddProduct = (props) => {
                   </Form.Select>
                 </Form.Group>
               </Col>
-              <Col xs={12} sm={6}>
+            </Row>
+            <Row>
+              <Col xs={12} sm={4}>
                 <Form.Group
-                  as={Row}
+                  className="mb-3 mt-4 pt-2"
+                  controlId="formHorizontalPrice"
+                >
+                  <Form.Label>Retail Price</Form.Label>{" "}
+                  <Form.Control
+                    type="number"
+                    size="lg"
+                    value={retailPrice}
+                    required
+                    onChange={(e) => setRetailPrice(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+              <Col xs={12} sm={4}>
+                <Form.Group
                   className="mb-3 mt-4 pt-2"
                   controlId="formHorizontalSale"
                 >
-                  <Form.Label column sm={8}>
-                    Sale Price
-                  </Form.Label>{" "}
-                  <Col sm={4}>
-                    <Form.Control
-                      type="number"
-                      size="lg"
-                      value={salePrice}
-                      required
-                      onChange={(e) => setSalePrice(e.target.value)}
-                    />
-                  </Col>
+                  <Form.Label>Sale Price</Form.Label>{" "}
+                  <Form.Control
+                    type="number"
+                    size="lg"
+                    value={salePrice}
+                    required
+                    onChange={(e) => setSalePrice(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+              <Col xs={12} sm={4}>
+                <Form.Group
+                  className="mb-3 mt-4 pt-2"
+                  controlId="formHorizontalSale"
+                >
+                  <Form.Label>Quantity in Stock</Form.Label>{" "}
+                  <Form.Control
+                    type="number"
+                    size="lg"
+                    value={stockQuantity}
+                    required
+                    onChange={(e) => setStockQuantity(e.target.value)}
+                  />
                 </Form.Group>
               </Col>
             </Row>
@@ -212,45 +217,6 @@ const AddProduct = (props) => {
                 </Form.Group>
               </Col>
               <Col xs={12} sm={6}>
-                <Form.Group
-                  as={Row}
-                  className="mb-3 mt-4 pt-2"
-                  controlId="formHorizontalSale"
-                >
-                  <Form.Label column sm={8}>
-                    Quantity in Stock
-                  </Form.Label>{" "}
-                  <Col sm={4}>
-                    <Form.Control
-                      type="number"
-                      size="lg"
-                      value={stockQuantity}
-                      required
-                      onChange={(e) => setStockQuantity(e.target.value)}
-                    />
-                  </Col>
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12} sm={6}>
-                <Form.Group
-                  className="mb-3"
-                  controlId="formRowShortDescription"
-                >
-                  <Form.Label>Product Short Attributes</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    size="lg"
-                    placeholder="this will guide, short attributes, comma separated, five word phrases max"
-                    value={attributes}
-                    required
-                    onChange={(e) => setAttributes(e.target.value)}
-                  />
-                </Form.Group>
-              </Col>
-              <Col xs={12} sm={6}>
                 <Form.Group className="mb-3" controlId="formImage">
                   <Form.Label>Product Image</Form.Label>
                   <Form.Control
@@ -264,7 +230,36 @@ const AddProduct = (props) => {
               </Col>
             </Row>
             <Row>
-              <Form.Group className="mb-3" controlId="formRowShortDescription">
+              <Col xs={12} sm={12}>
+                <Form.Group
+                  as={Row}
+                  className="mb-3"
+                  controlId="formRowShortDescription"
+                >
+                  <Form.Label column sm={3}>
+                    Product <br />
+                    Short <br />
+                    Attributes
+                  </Form.Label>
+                  <Col sm={9}>
+                    <Form.Control
+                      as="textarea"
+                      rows={4}
+                      size="lg"
+                      placeholder="this will guide, short attributes, comma separated, five word phrases max"
+                      value={attributes}
+                      required
+                      onChange={(e) => setAttributes(e.target.value)}
+                    />
+                  </Col>
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
+              <Form.Group
+                className="mb-3 mt-2"
+                controlId="formRowShortDescription"
+              >
                 <Form.Label>Detailed Description</Form.Label>
                 <CKEditor
                   onChange={(e) => setDescription(e.editor.getData())}
