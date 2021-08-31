@@ -3,6 +3,7 @@ $theme-colors: (
   "primary": darkcyan,
   "dark": black,
   "danger": #da1414,
+  "success": #2dce3af5,
 );
 
 @import "~bootstrap/scss/bootstrap";
@@ -42,6 +43,11 @@ body {
   font-weight: 400;
   line-height: 1;
 }
+main {
+  margin: 0;
+  padding: 0;
+}
+
 h1,
 h2,
 h3,

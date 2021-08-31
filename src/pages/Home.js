@@ -5,7 +5,6 @@ import ProductCard from "../components/ProductCard";
 import { fetchProductsStart } from "../redux/Products/product.actions";
 import firstSlider from "../assets/firstSlider.jpg";
 import slider1 from "../assets/slider1.jpg";
-import secondSlider from "../assets/secondSlider.jpg";
 import React from "react";
 
 const mapState = ({ productsData }) => ({ products: productsData.products });
@@ -19,7 +18,7 @@ const Home = () => {
   }, []);
 
   return (
-    <React.Fragment>
+    <Container fluid>
       <Carousel>
         <Carousel.Item>
           <Image
@@ -68,7 +67,7 @@ const Home = () => {
           </Button>
         </div>
       </Row>
-    </React.Fragment>
+    </Container>
   );
 };
 

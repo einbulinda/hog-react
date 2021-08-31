@@ -4,11 +4,11 @@ import React from "react";
 
 const MainLayout = (props) => {
   return (
-    <React.Fragment>
+    <div>
       <Header {...props} />
       <main>{props.children}</main>
       <Footer />
-    </React.Fragment>
+    </div>
   );
 };
 

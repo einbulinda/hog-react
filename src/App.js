@@ -29,6 +29,7 @@ import NotFound from "./pages/NotFound";
 import AddProduct from "./pages/admin/products/AddProduct";
 import Categories from "./pages/admin/categories/Categories";
 import Search from "./pages/Search";
+import ProductDetails from "./pages/ProductDetails";
 
 const App = (props) => {
   const dispatch = useDispatch();
@@ -59,18 +60,27 @@ const App = (props) => {
           )}
         />
         <Route
-          path="/about"
-          render={() => (
-            <MainLayout>
-              <About />
-            </MainLayout>
-          )}
-        />
-        <Route
           path="/products"
           render={() => (
             <MainLayout>
               <Products />
+            </MainLayout>
+          )}
+        />
+        <Route
+          exact
+          path="/product/:productID"
+          render={() => (
+            <MainLayout>
+              <ProductDetails />
+            </MainLayout>
+          )}
+        />
+        <Route
+          path="/about"
+          render={() => (
+            <MainLayout>
+              <About />
             </MainLayout>
           )}
         />

@@ -1,4 +1,5 @@
 import { Button, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 import { FaCartPlus } from "react-icons/fa";
 import NumberFormat from "react-number-format";
@@ -7,14 +8,25 @@ const ProductCard = ({ products }) => {
   return (
     <div className="d-flex p-2 m-2">
       {products.map((product, index) => {
-        const { imageUrl, productName, retailPrice, rating, reviews } = product;
+        const {
+          documentID,
+          imageUrl,
+          productName,
+          retailPrice,
+          rating,
+          reviews,
+        } = product;
 
         return (
           <Card className="m-3" style={{ width: "18rem" }} key={index}>
-            <Card.Img variant="top" src={imageUrl} alt={productName} fluid />
+            <Link to={`product/${documentID}`}>
+              <Card.Img variant="top" src={imageUrl} alt={productName} fluid />
+            </Link>
             <Card.Body className="mb-0 text-center d-flex flex-column">
               <Card.Text className="fs-2 fw-bold mt-auto">
-                {productName}
+                <Link to={`product/${documentID}`} className="text-dark">
+                  {productName}
+                </Link>
               </Card.Text>
               <Card.Text className="fs-3 fw-bold">
                 <NumberFormat

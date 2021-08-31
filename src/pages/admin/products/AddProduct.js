@@ -19,6 +19,7 @@ import {
 } from "../../../redux/Products/product.actions";
 import { storageRef } from "../../../firebase/utils";
 import { fetchCategoriesStart } from "../../../redux/categories/category.actions";
+import { CKEditor } from "ckeditor4-react";
 
 const mapState = ({ productsData, categoriesData }) => ({
   products: productsData.products,
@@ -233,53 +234,42 @@ const AddProduct = (props) => {
             </Row>
             <Row>
               <Col xs={12} sm={6}>
-                <Row>
-                  <Form.Group
-                    className="mb-3"
-                    controlId="formRowShortDescription"
-                  >
-                    <Form.Label>Product Short Attributes</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      rows={4}
-                      size="lg"
-                      placeholder="this will guide, short attributes, comma separated, five word phrases max"
-                      value={attributes}
-                      required
-                      onChange={(e) => setAttributes(e.target.value)}
-                    />
-                  </Form.Group>
-                </Row>
-                <Row>
-                  <Form.Group className="mb-3" controlId="formImage">
-                    <Form.Label>Product Image</Form.Label>
-                    <Form.Control
-                      size="lg"
-                      type="file"
-                      // value={imageUrl}
-                      required
-                      onChange={onFileChange}
-                    />
-                  </Form.Group>
-                </Row>
-              </Col>
-              <Col xs={12} sm={6}>
                 <Form.Group
                   className="mb-3"
                   controlId="formRowShortDescription"
                 >
-                  <Form.Label>Detailed Description</Form.Label>
+                  <Form.Label>Product Short Attributes</Form.Label>
                   <Form.Control
                     as="textarea"
-                    rows={7}
+                    rows={3}
                     size="lg"
-                    placeholder="Detailed product description"
-                    value={description}
+                    placeholder="this will guide, short attributes, comma separated, five word phrases max"
+                    value={attributes}
                     required
-                    onChange={(e) => setDescription(e.target.value)}
+                    onChange={(e) => setAttributes(e.target.value)}
                   />
                 </Form.Group>
               </Col>
+              <Col xs={12} sm={6}>
+                <Form.Group className="mb-3" controlId="formImage">
+                  <Form.Label>Product Image</Form.Label>
+                  <Form.Control
+                    size="lg"
+                    type="file"
+                    // value={imageUrl}
+                    required
+                    onChange={onFileChange}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row>
+              <Form.Group className="mb-3" controlId="formRowShortDescription">
+                <Form.Label>Detailed Description</Form.Label>
+                <CKEditor
+                  onChange={(e) => setDescription(e.editor.getData())}
+                />
+              </Form.Group>
             </Row>
             <Form.Group className="text-center p-3">
               <Button
