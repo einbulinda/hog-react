@@ -5,7 +5,7 @@ import {
   addCategoryStart,
   deleteCategoryStart,
   fetchCategoriesStart,
-} from "../../../redux/categories/category.actions";
+} from "../../../redux/Categories/category.actions";
 import { MdDelete } from "react-icons/md";
 import { AiOutlineEdit } from "react-icons/ai";
 

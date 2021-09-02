@@ -3,8 +3,17 @@ import { Link } from "react-router-dom";
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 import { FaCartPlus } from "react-icons/fa";
 import NumberFormat from "react-number-format";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/Cart/cart.actions";
 
 const ProductCard = ({ products }) => {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    if (!product) return;
+    dispatch(addToCart(product));
+  };
+
   return (
     <div className="d-flex p-2 m-2">
       {products.map((product, index) => {
@@ -49,6 +58,7 @@ const ProductCard = ({ products }) => {
                 size="lg"
                 className="fs-4 text-uppercase"
                 variant="danger"
+                onClick={() => handleAddToCart(product)}
               >
                 {" "}
                 <FaCartPlus /> Buy Now

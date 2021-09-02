@@ -16,6 +16,7 @@ import {
 } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 import { useHistory } from "react-router-dom";
+import { addToCart } from "../redux/Cart/cart.actions";
 
 const mapState = ({ productsData }) => ({
   product: productsData.product,
@@ -44,6 +45,11 @@ const ProductDetailsCard = ({}) => {
       dispatch(setProduct({}));
     };
   }, []);
+
+  const handleAddToCart = (product) => {
+    if (!product) return;
+    dispatch(addToCart(product));
+  };
 
   return (
     <Container fluid>
@@ -89,7 +95,12 @@ const ProductDetailsCard = ({}) => {
                 </ListGroup>
               ))}
             <div className="mt-4 pt-4">
-              <Button variant="danger" size="lg" className="fs-3 mx-3">
+              <Button
+                variant="danger"
+                size="lg"
+                className="fs-3 mx-3"
+                onClick={() => handleAddToCart(product)}
+              >
                 Add to Cart
               </Button>
               <Button variant="dark" size="lg" className="fs-3 mx-3">

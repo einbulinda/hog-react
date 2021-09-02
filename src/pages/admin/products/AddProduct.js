@@ -18,7 +18,7 @@ import {
   deleteProductStart,
 } from "../../../redux/Products/product.actions";
 import { storageRef } from "../../../firebase/utils";
-import { fetchCategoriesStart } from "../../../redux/categories/category.actions";
+import { fetchCategoriesStart } from "../../../redux/Categories/category.actions";
 import { CKEditor } from "ckeditor4-react";
 
 const mapState = ({ productsData, categoriesData }) => ({

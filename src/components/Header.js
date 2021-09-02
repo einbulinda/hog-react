@@ -14,14 +14,16 @@ import { Link, NavLink } from "react-router-dom";
 import { signOutUserStart } from "../redux/User/user.action";
 import AdminToolbar from "./AdminToolbar";
 import { Search } from "react-bootstrap-icons";
+import { selectCartItemsCount } from "../redux/Cart/cart.selectors";
 
-const mapState = ({ user }) => ({
-  currentUser: user.currentUser,
+const mapState = (state) => ({
+  currentUser: state.user.currentUser,
+  totalCartItems: selectCartItemsCount(state),
 });
 
 const Header = (props) => {
   const dispatch = useDispatch();
-  const { currentUser } = useSelector(mapState);
+  const { currentUser, totalCartItems } = useSelector(mapState);
 
   const signOut = () => {
     dispatch(signOutUserStart());
@@ -29,7 +31,7 @@ const Header = (props) => {
 
   return (
     <header>
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar fixed="top" bg="dark" variant="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand>
             <Link to="/">
@@ -76,7 +78,7 @@ const Header = (props) => {
               <NavLink className="nav-link px-4" to="/cart">
                 <FontAwesomeIcon icon="shopping-cart" />{" "}
                 <sup>
-                  <span> 0</span>
+                  <span> {totalCartItems}</span>
                 </sup>
               </NavLink>
               <NavLink className="nav-link px-4" to="/wishlist">
