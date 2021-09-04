@@ -1,6 +1,7 @@
 import { Col, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import dpiLogo from "../assets/logos/400dpilogo.jpg";
+import { ROOT } from "./CONSTANTS";
 
 const NotFound = (props) => {
   return (
@@ -12,7 +13,7 @@ const NotFound = (props) => {
         <h1 className="display-1">SORRY</h1>
         <p className="display3">We could not find that page</p>
         <p className="display4">
-          Get exciting deals on our <Link to="/">merchandise</Link>
+          Get exciting deals on our <Link to={ROOT}>merchandise</Link>
         </p>
         <Row className="mt-5">
           <Col xs={12} md={5} className="text-end">

@@ -4,11 +4,11 @@ import { People } from "react-bootstrap-icons";
 import { HiOutlineViewGridAdd } from "react-icons/hi";
 import { BiLogOut, BiMailSend } from "react-icons/bi";
 import { CgListTree } from "react-icons/cg";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import VerticalNav from "../components/VerticalNav";
+import Footer from "../../components/Footer";
+import Header from "../../components/Header";
+import VerticalNav from "../../components/VerticalNav";
 import { useDispatch } from "react-redux";
-import { signOutUserStart } from "../redux/User/user.action";
+import { signOutUserStart } from "../../redux/User/user.action";
 
 const AdminLayout = (props) => {
   const dispatch = useDispatch();

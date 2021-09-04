@@ -1,0 +1,16 @@
+export const ROOT = "/";
+export const PRODUCTS = "/products";
+export const PRODUCT_DETAILS = "/product/:productID";
+export const ABOUT = "/about";
+export const SALE = "/sale";
+export const CONTACT_US = "/contact-us";
+export const CART = "/cart";
+export const WISHLIST = "/wishlist";
+export const LOGIN = "/user/login";
+export const REGISTER = "/user/register";
+export const PASSWORD_RESET = "/user/reset-password";
+export const ACCOUNT = "/user/account";
+export const ADMIN = "/admin";
+export const PRODUCTS_LIST = "/admin/products";
+export const CATEGORIES = "/admin/categories";
+export const ADD_PRODUCT = "/admin/add-product";
