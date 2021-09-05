@@ -26,7 +26,7 @@ const mapState = ({ productsData, categoriesData }) => ({
   categories: categoriesData.categories,
 });
 
-const AddProduct = (props) => {
+const AdminProducts = (props) => {
   const dispatch = useDispatch();
   const [show, setShow] = useState();
   const { products, categories } = useSelector(mapState);
@@ -352,4 +352,4 @@ const AddProduct = (props) => {
   );
 };
 
-export default AddProduct;
+export default AdminProducts;

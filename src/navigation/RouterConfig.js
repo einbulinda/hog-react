@@ -4,7 +4,6 @@ import AdminLayout from "./layouts/AdminLayout";
 import AdminRoutes from "./Auth/AdminRoutes";
 import PrivateRoute from "./Auth/PrivateRoute";
 import About from "../pages/About";
-import Admin from "../pages/admin/Admin";
 import Cart from "../pages/Cart";
 import ContactUs from "../pages/ContactUs";
 import Home from "../pages/Home";
@@ -17,7 +16,7 @@ import ResetPassword from "../pages/UserPages/ResetPassword";
 import SignIn from "../pages/UserPages/SignIn";
 import Wishlist from "../pages/Wishlist";
 import Categories from "../pages/admin/categories/Categories";
-import AddProduct from "../pages/admin/products/AddProduct";
+import AdminProducts from "../pages/admin/products";
 import NotFound from "./NotFound";
 import {
   ABOUT,
@@ -36,6 +35,7 @@ import {
   SALE,
   WISHLIST,
 } from "./CONSTANTS";
+import AdminDashboard from "../pages/admin/AdminDashboard";
 
 const RouterConfig = () => {
   return (
@@ -151,21 +151,11 @@ const RouterConfig = () => {
         render={() => (
           <AdminRoutes>
             <AdminLayout>
-              <Admin />
+              <AdminDashboard />
             </AdminLayout>
           </AdminRoutes>
         )}
       />
-      {/* <Route
-        path={PRODUCTS_LIST}
-        render={() => (
-          <AdminRoutes>
-            <AdminLayout>
-              <Admin />
-            </AdminLayout>
-          </AdminRoutes>
-        )}
-      /> */}
       <Route
         exact
         path={CATEGORIES}
@@ -183,7 +173,7 @@ const RouterConfig = () => {
         render={() => (
           <AdminRoutes>
             <AdminLayout>
-              <AddProduct />
+              <AdminProducts />
             </AdminLayout>
           </AdminRoutes>
         )}
