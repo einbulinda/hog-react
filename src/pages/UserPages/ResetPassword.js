@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { Button, Card, Container, Form, ListGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
+import { useHistory } from "react-router";
 import FormInput from "../../components/Forms/FormInput";
+import { LOGIN } from "../../navigation/CONSTANTS";
 import { resetUserStart, resetUserState } from "../../redux/User/user.action";
 
 const mapState = ({ user }) => ({
@@ -15,13 +17,14 @@ const ResetPassword = (props) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     if (passwordResetSuccess) {
       dispatch(resetUserState());
-      props.history.push("/login");
+      history.push(LOGIN);
     }
-  }, [passwordResetSuccess]);
+  }, [dispatch, history, passwordResetSuccess]);
 
   useEffect(() => {
     if (Array.isArray(userError) && userError.length > 0) {

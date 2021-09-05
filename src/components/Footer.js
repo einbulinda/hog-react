@@ -1,5 +1,4 @@
 import { Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {

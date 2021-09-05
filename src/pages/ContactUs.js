@@ -1,8 +1,10 @@
+import { Container } from "react-bootstrap";
+
 const ContactUs = () => {
   return (
-    <main>
+    <Container fluid>
       <h1>Lets talk, shall we?</h1>
-    </main>
+    </Container>
   );
 };
 

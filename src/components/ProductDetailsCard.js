@@ -22,7 +22,7 @@ const mapState = ({ productsData }) => ({
   product: productsData.product,
 });
 
-const ProductDetailsCard = ({}) => {
+const ProductDetailsCard = () => {
   const dispatch = useDispatch();
   const { productID } = useParams();
   const { product } = useSelector(mapState);
@@ -44,7 +44,7 @@ const ProductDetailsCard = ({}) => {
     return () => {
       dispatch(setProduct({}));
     };
-  }, []);
+  }, [dispatch, productID]);
 
   const handleAddToCart = (product) => {
     if (!product) return;

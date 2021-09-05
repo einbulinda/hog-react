@@ -4,6 +4,8 @@ import { Link, withRouter } from "react-router-dom";
 import FormInput from "../../components/Forms/FormInput";
 import { signUpUserStart } from "../../redux/User/user.action";
 import { useDispatch, useSelector } from "react-redux";
+import { LOGIN, ROOT } from "../../navigation/CONSTANTS";
+import { useHistory } from "react-router";
 
 const mapState = ({ user }) => ({
   currentUser: user.currentUser,
@@ -18,14 +20,15 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     if (currentUser) {
       resetForm();
       // alert("Password reset link has been sent to registered email.");
-      props.history.push("/");
+      history.push(ROOT);
     }
-  }, [currentUser]);
+  }, [history, currentUser]);
 
   useEffect(() => {
     if (Array.isArray(userError) && userError.length > 0) {
@@ -116,7 +119,7 @@ const Register = (props) => {
           </Form>
           <Card.Text className="my-3">
             <span>
-              <Link to="/login">Sign In </Link>
+              <Link to={LOGIN}>Sign In </Link>
             </span>
           </Card.Text>
         </Card.Body>

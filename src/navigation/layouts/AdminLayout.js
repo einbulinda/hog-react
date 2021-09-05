@@ -18,40 +18,42 @@ const AdminLayout = (props) => {
   };
 
   return (
-    <div className="admin-layout">
+    <>
       <Header {...props} />
-      <Row className="w-100">
-        <Col md="2" className="sidenav text-white px-3">
-          <VerticalNav>
-            <Row>
-              <Nav defaultActiveKey="/admin/products" className="flex-column">
-                <NavLink className="nav-link" to="/admin/products">
-                  {" "}
-                  <HiOutlineViewGridAdd /> Products
-                </NavLink>
-                <NavLink className="nav-link" to="/admin/categories">
-                  {" "}
-                  <CgListTree /> Categories
-                </NavLink>
-                <NavLink className="nav-link" to="/admin/users">
-                  <People /> Users
-                </NavLink>
-                <NavLink className="nav-link" to="/admin/mails">
-                  <BiMailSend /> Messages
-                </NavLink>
-                <Nav.Link onClick={() => signOut()}>
-                  <BiLogOut /> Logout
-                </Nav.Link>
-              </Nav>
-            </Row>
-          </VerticalNav>
-        </Col>
-        <Col md="10">
-          <Row>{props.children}</Row>
-        </Col>
-      </Row>
+      <main>
+        <Row className="w-100">
+          <Col md="2" className="sidenav text-white px-3">
+            <VerticalNav>
+              <Row>
+                <Nav defaultActiveKey="/admin/products" className="flex-column">
+                  <NavLink className="nav-link" to="/admin/products">
+                    {" "}
+                    <HiOutlineViewGridAdd /> Products
+                  </NavLink>
+                  <NavLink className="nav-link" to="/admin/categories">
+                    {" "}
+                    <CgListTree /> Categories
+                  </NavLink>
+                  <NavLink className="nav-link" to="/admin/users">
+                    <People /> Users
+                  </NavLink>
+                  <NavLink className="nav-link" to="/admin/mails">
+                    <BiMailSend /> Messages
+                  </NavLink>
+                  <Nav.Link onClick={() => signOut()}>
+                    <BiLogOut /> Logout
+                  </Nav.Link>
+                </Nav>
+              </Row>
+            </VerticalNav>
+          </Col>
+          <Col md="10">
+            <Row>{props.children}</Row>
+          </Col>
+        </Row>
+      </main>
       <Footer />
-    </div>
+    </>
   );
 };
 

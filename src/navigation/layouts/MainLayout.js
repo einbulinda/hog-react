@@ -4,7 +4,7 @@ import React from "react";
 
 const MainLayout = (props) => {
   return (
-    <div>
+    <div id="mainLayout">
       <Header {...props} />
       <main>{props.children}</main>
       <Footer />

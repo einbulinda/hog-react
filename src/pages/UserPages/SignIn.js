@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import { Link, withRouter } from "react-router-dom";
 import FormInput from "../../components/Forms/FormInput";
 import {
@@ -17,6 +18,7 @@ const SignIn = (props) => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
 
   const resetForm = () => {
     setEmail("");
@@ -26,9 +28,9 @@ const SignIn = (props) => {
   useEffect(() => {
     if (currentUser) {
       resetForm();
-      props.history.push("/");
+      history.push("/");
     }
-  }, [currentUser]);
+  }, [history, currentUser]);
 
   const handleSignin = (e) => {
     e.preventDefault();

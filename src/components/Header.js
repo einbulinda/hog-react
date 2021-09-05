@@ -42,7 +42,7 @@ const Header = (props) => {
 
   return (
     <header>
-      <Navbar fixed="top" bg="dark" variant="dark" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand>
             <Link to={ROOT}>

@@ -22,7 +22,7 @@ const Categories = (props) => {
 
   useEffect(() => {
     dispatch(fetchCategoriesStart());
-  }, []);
+  }, [dispatch]);
 
   const resetForm = () => {
     setCategoryName("");

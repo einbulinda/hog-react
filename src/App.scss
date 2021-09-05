@@ -23,7 +23,7 @@ body {
   height: 100%;
 }
 
-#root > .App > div {
+#mainLayout {
   min-height: 100%;
   display: grid;
   grid-template-columns: 100%;

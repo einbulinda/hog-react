@@ -15,7 +15,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchProductsStart());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container fluid>

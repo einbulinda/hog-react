@@ -44,7 +44,7 @@ const AddProduct = (props) => {
   useEffect(() => {
     dispatch(fetchProductsStart());
     dispatch(fetchCategoriesStart());
-  }, []); //empty dependency array to run only on first mounting of product
+  }, [dispatch]); //empty dependency array to run only on first mounting of product
 
   const handleShow = () => setShow(true);
 

@@ -13,7 +13,7 @@ const useAdminAuth = (props) => {
     if (!checkUserIsAdmin(currentUser)) {
       history.push("/login");
     }
-  }, [currentUser]);
+  }, [history, currentUser]);
 
   return currentUser;
 };
